@@ -36,5 +36,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation files('libs/activation.jar')
-    implementation 'com.github.glomadrian:CodeInput:1.1@aar'
+    implementation 'com.bigbangbutton:editcodeview:1.0.6'
 }

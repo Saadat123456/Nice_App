@@ -28,6 +28,8 @@ import com.applock.dealFiles.files;
 import com.applock.model.Password;
 import com.applock.services.BackgroundManager;
 import com.applock.utils.Utils;
+import com.bigbangbutton.editcodeview.EditCodeListener;
+import com.bigbangbutton.editcodeview.EditCodeView;
 import com.shuhart.stepview.StepView;
 
 import java.util.Arrays;
@@ -56,7 +58,7 @@ public class PatternLockAct extends AppCompatActivity {
     Password utilsPasword;
     String userPassword;
     Boolean passwordReset;
-
+    int randomNumber;
 
 
     @Override
@@ -118,14 +120,28 @@ public class PatternLockAct extends AppCompatActivity {
         findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int verifyNumber = randomGen();
-                sendMail(verifyNumber);
+                randomNumber = randomGen();
+                sendMail(randomNumber);
                 findViewById(R.id.allBody).setVisibility(View.GONE);
                 findViewById(R.id.confirmEmail).setVisibility(View.VISIBLE);
             }
         });
 
-        findViewById(R.id.pairing)
+        final EditCodeView editCodeView = (EditCodeView) findViewById(R.id.edit_code);
+        editCodeView.setEditCodeListener(new EditCodeListener() {
+            @Override
+            public void onCodeReady(String code) {
+                int code_edit = Integer.parseInt(editCodeView.getCode());
+                if(code_edit == randomNumber) {
+                    PatternLockAct p = new PatternLockAct();
+                    Intent i = new Intent(PatternLockAct.this, p.getClass());
+                    i.putExtra("pr","YES");
+                    startActivity(i);
+                }
+                else
+                    Toast.makeText(PatternLockAct.this, "Enter Valid Code", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
