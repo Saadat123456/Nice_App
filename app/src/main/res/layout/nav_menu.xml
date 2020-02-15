@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="65dp"
+    android:id="@+id/chat_head_root"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--Profile image for the chat head.-->
+    <LinearLayout
+        android:id="@+id/latestAppsHere"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_below="@id/latestAppsHere"
+        android:background="#00FFFFFF"
+            android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:id="@+id/moveDown"/>
+
+</RelativeLayout>

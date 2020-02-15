@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root"
+    tools:context=".PatternLockAct">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/blue"
+        android:gravity="center">
+
+        <com.shuhart.stepview.StepView
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            app:sv_animationType="All"
+            app:sv_stepPadding="12dp"
+            app:sv_steps="@array/steps"
+            android:id="@+id/step_view"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/normal_layout">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="30dp"
+                android:src="@drawable/ic_security_black_24dp"
+                android:id="@+id/app_icon"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Protected By"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/allBody"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/status_password"
+            android:padding="20sp"/>
+
+        <com.andrognito.patternlockview.PatternLockView
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:layout_margin="5dp"
+            app:correctStateColor="@color/green"
+            app:dotCount="3"
+            app:dotNormalSize="10sp"
+            app:dotSelectedSize="12dp"
+            app:normalStateColor="@color/grey"
+            app:pathWidth="8dp"
+            android:id="@+id/pattern_view"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/emailLayout">
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your Email"
+                android:ems="10"
+                android:layout_margin="30dp"
+                android:inputType="textEmailAddress" />
+            <Button
+                android:id="@+id/emailDone"
+                android:background="#00000000"
+                android:layout_margin="10dp"
+                android:layout_below="@id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/confirmEmail"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <com.github.glomadrian.codeinputlib.CodeInput
+            android:id="@+id/pairing"
+            android:layout_marginTop="20dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:underline_color="#457ad1"
+            app:underline_selected_color="#9e1ace"
+            app:text_color="#b12eff"
+            app:hint_color="#77ce9d"
+            app:hint_text="Pin code"
+            app:codes="5"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

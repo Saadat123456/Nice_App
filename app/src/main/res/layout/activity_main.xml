@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/bottom"
+        android:id="@+id/center">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:id="@+id/toolbarParent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/blue"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:id="@+id/toolbar"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/toolbarParent"
+            android:background="@color/white"
+            android:id="@+id/layout_permission">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_sentiment_neutral_black_24dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:text="Set Permission"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="access to action usage settings to enable applock"/>
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Enable"
+                android:textColor="@color/green"
+                android:background="@drawable/btn_on_click"
+                android:drawableRight="@drawable/ic_play_arrow_black_24dp"
+                android:onClick="setPermission"/>
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/contentFragment"
+            android:layout_below="@id/layout_permission"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/settingsButtonNavigation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_settings_black_24dp"/>
+            <ImageButton
+                android:id="@+id/allAppsButtonNavigation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_apps_black_24dp" />
+            <ImageButton
+                android:id="@+id/smsBulkButtonNavigation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_message_white_24dp" />
+            <ImageButton
+                android:id="@+id/helpButtonNavigation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_help_white_24dp" />
+            <ImageButton
+                android:id="@+id/shareButtonNavigation"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_share_white_24dp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
