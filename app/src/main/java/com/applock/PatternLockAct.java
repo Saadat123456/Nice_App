@@ -5,6 +5,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -92,6 +94,7 @@ public class PatternLockAct extends AppCompatActivity {
         initClickListener();
 
     }
+
 
     void initClickListener()
     {
