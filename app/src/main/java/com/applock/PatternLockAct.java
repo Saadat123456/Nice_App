@@ -14,7 +14,10 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -69,6 +72,7 @@ public class PatternLockAct extends AppCompatActivity {
         setContentView(R.layout.activity_pattern_lock);
         BackgroundManager.getInstance().init(this).startService();
 
+
         if (getIntent().getStringExtra("pr") != null) {
             passwordReset = getIntent().getStringExtra("pr").equals("YES");
         }else
@@ -99,10 +103,11 @@ public class PatternLockAct extends AppCompatActivity {
     void initClickListener()
     {
 
-        findViewById(R.id.emailDone).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText ed = findViewById(R.id.email);
+        final EditText ed = findViewById(R.id.email);
+        ed.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
+            if(actionId == EditorInfo.IME_ACTION_DONE){
                 if (ed.getText().equals(""))
                     Toast.makeText(PatternLockAct.this, "Enter Valid Email.", Toast.LENGTH_LONG).show();
                 else {
@@ -112,15 +117,20 @@ public class PatternLockAct extends AppCompatActivity {
                         utilsPasword.setEmail(ed.getText().toString());
                         findViewById(R.id.emailLayout).setVisibility(View.GONE);
                         findViewById(R.id.edit_code).setVisibility(View.VISIBLE);
+                        findViewById(R.id.edit_code).requestFocus();
                         randomNumber = randomGen();
                         sendMail(randomNumber);
+                        findViewById(R.id.confirmEmail);
                     }else
                     {
                         Toast.makeText(PatternLockAct.this, "Enter Valid Email.", Toast.LENGTH_LONG).show();
                     }
                 }
+                return true;
             }
-        });
+            return false;
+        }
+    });
 
 
         findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
@@ -129,7 +139,7 @@ public class PatternLockAct extends AppCompatActivity {
                 stepView.go(0,true);
                 findViewById(R.id.allBody).setVisibility(View.GONE);
                 findViewById(R.id.confirmEmail).setVisibility(View.VISIBLE);
-
+                findViewById(R.id.email).requestFocus();
             }
         });
 
