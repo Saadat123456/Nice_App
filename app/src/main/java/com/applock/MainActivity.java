@@ -38,7 +38,7 @@ import com.applock.utils.Utils;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements allLockedApps.OnFragmentInteractionListener,settings.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements allLockedApps.OnFragmentInteractionListener,settings.OnFragmentInteractionListener {
 
     /*Global Variables Here**/
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
     List<AppItem> lockedAppList;
     gridviewAdapter gridViewAdapter;
 
-    ImageButton navAllApp,navSettings;
+    ImageButton navAllApp, navSettings;
     files file;
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
@@ -60,10 +60,8 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
         setContentView(R.layout.activity_main);
 
 
-
-        if (Build.VERSION.SDK_INT >= 23 ) {
-            if (!getDrawPermission())
-            {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!getDrawPermission()) {
                 Toast.makeText(this, "You don't provided permission to draw over apps.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -108,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
 
 
     /* Fragment Switch*/
-    void startFragment(Fragment fragment)
-    {
+    void startFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragment, fragment);
@@ -120,8 +117,7 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
 
     /* Start PaperDb*/
 
-    private void startPaperdb()
-    {
+    private void startPaperdb() {
         utils = new Utils(this);
     }
 
@@ -131,8 +127,7 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
 
     /* Initialize Toolbar*/
 
-    private void initToolbar()
-    {
+    private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -146,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id==android.R.id.home)
+        if (id == android.R.id.home)
             finish();
 
         switch (item.getItemId()) {
@@ -181,18 +176,25 @@ public class MainActivity extends AppCompatActivity implements allLockedApps.OnF
         startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
     }
 
-    public void rateApp()
-    {
-        try
-        {
+    public void rateApp() {
+        try {
             Intent rateIntent = rateIntentForUrl("market://details");
             startActivity(rateIntent);
-        }
-        catch (ActivityNotFoundException e)
-        {
+        } catch (ActivityNotFoundException e) {
             Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
             startActivity(rateIntent);
         }
+    }
+
+    public void shareButton(View view)
+    {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Install Nice App Locker And Protect your apps from attackers";
+        String shareSub = "NICE APP LOCKER";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
 
     private Intent rateIntentForUrl(String url)
