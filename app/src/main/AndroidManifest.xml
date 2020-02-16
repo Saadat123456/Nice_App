@@ -31,7 +31,8 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".PatternLockAct">
+        <activity android:name=".PatternLockAct"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

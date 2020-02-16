@@ -109,6 +109,8 @@ public class PatternLockAct extends AppCompatActivity {
                         utilsPasword.setEmail(ed.getText().toString());
                         findViewById(R.id.emailLayout).setVisibility(View.GONE);
                         findViewById(R.id.edit_code).setVisibility(View.VISIBLE);
+                        randomNumber = randomGen();
+                        sendMail(randomNumber);
                     }else
                     {
                         Toast.makeText(PatternLockAct.this, "Enter Valid Email.", Toast.LENGTH_LONG).show();
@@ -121,9 +123,7 @@ public class PatternLockAct extends AppCompatActivity {
         findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                randomNumber = randomGen();
                 stepView.go(0,true);
-                sendMail(randomNumber);
                 findViewById(R.id.allBody).setVisibility(View.GONE);
                 findViewById(R.id.confirmEmail).setVisibility(View.VISIBLE);
 
