@@ -98,49 +98,54 @@
             app:pathWidth="8dp"
             android:id="@+id/pattern_view"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/confirmEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <RelativeLayout
+            android:id="@+id/emailLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:id="@+id/emailLayout">
+            tools:visibility="visible">
+
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your Email"
-                android:ems="10"
                 android:layout_margin="30dp"
+                android:ems="10"
+                android:hint="Your Email"
                 android:inputType="textEmailAddress" />
+
             <Button
                 android:id="@+id/emailDone"
-                android:background="#00000000"
-                android:layout_margin="10dp"
-                android:layout_below="@id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Done"/>
+                android:layout_below="@id/email"
+                android:layout_margin="10dp"
+                android:background="#00000000"
+                android:text="Done" />
         </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/confirmEmail"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+
         <com.bigbangbutton.editcodeview.EditCodeView
             android:id="@+id/edit_code"
             android:layout_width="200dp"
             android:layout_height="56dp"
             android:layout_gravity="center"
             android:layout_marginBottom="40dp"
-            app:underlineReductionScale="0.3"
             app:codeLength="5"
             app:textColor="@color/white"
-            app:underlineStroke="5dp" />
+            app:underlineReductionScale="0.3"
+            app:underlineStroke="5dp"
+            tools:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>

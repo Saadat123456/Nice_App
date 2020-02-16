@@ -105,9 +105,10 @@ public class PatternLockAct extends AppCompatActivity {
                 else {
 
                     if(isEmailValid(ed.getText().toString())) {
-                        stepView.done(true);
+                        stepView.go(1,true);
                         utilsPasword.setEmail(ed.getText().toString());
-                        startAct();
+                        findViewById(R.id.emailLayout).setVisibility(View.GONE);
+                        findViewById(R.id.edit_code).setVisibility(View.VISIBLE);
                     }else
                     {
                         Toast.makeText(PatternLockAct.this, "Enter Valid Email.", Toast.LENGTH_LONG).show();
@@ -121,9 +122,11 @@ public class PatternLockAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 randomNumber = randomGen();
+                stepView.go(0,true);
                 sendMail(randomNumber);
                 findViewById(R.id.allBody).setVisibility(View.GONE);
                 findViewById(R.id.confirmEmail).setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -133,6 +136,7 @@ public class PatternLockAct extends AppCompatActivity {
             public void onCodeReady(String code) {
                 int code_edit = Integer.parseInt(editCodeView.getCode());
                 if(code_edit == randomNumber) {
+                    stepView.done(true);
                     PatternLockAct p = new PatternLockAct();
                     Intent i = new Intent(PatternLockAct.this, p.getClass());
                     i.putExtra("pr","YES");
@@ -166,18 +170,24 @@ public class PatternLockAct extends AppCompatActivity {
 
         try {
 
-            /*TODO: if s empty*/
             String s = utilsPasword.getEmail();
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(s));
-            message.setSubject("Sent from MobileApp for Reset Password" );
+            if (s == null)
+            {
+                Toast.makeText(this, "You don't Specified Email", Toast.LENGTH_SHORT).show();
+                PatternLockAct p = new PatternLockAct();
+                Intent i = new Intent(PatternLockAct.this, p.getClass());
+                startActivity(i);
+            }else {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(s));
+                message.setSubject("Sent from MobileApp for Reset Password");
 
-            message.setText("Enter The Following Code to reset Password : "+number);
+                message.setText("Enter The Following Code to reset Password : " + number);
 
-            new SendMailTask().execute(message);
-
+                new SendMailTask().execute(message);
+            }
         }catch (MessagingException mex) {
             mex.printStackTrace();
         }
@@ -319,9 +329,8 @@ public class PatternLockAct extends AppCompatActivity {
                         if(userPassword.equals(pwd)){
                             utilsPasword.setPassword(userPassword);
                             status_password.setText(utilsPasword.STATUS_PASSWORD_CORRECT);
-                            stepView.go(2,true);
-                            findViewById(R.id.emailLayout).setVisibility(View.VISIBLE);
-                            findViewById(R.id.pattern_view).setVisibility(View.GONE);
+                            stepView.done(true);
+                            startAct();
                         }else{
                             status_password.setText(utilsPasword.STATUS_PASSWORD_INCORRECT);
                         }
@@ -375,8 +384,8 @@ public class PatternLockAct extends AppCompatActivity {
         if(utilsPasword.getPassword() == null)
         {
             normalLayout.setVisibility(View.GONE);
-            stepView.      setVisibility(View.VISIBLE);
-            stepView.setStepsNumber(3);
+            stepView.setVisibility(View.VISIBLE);
+            stepView.setStepsNumber(2);
             stepView.go(0,true);
         }else
         {
