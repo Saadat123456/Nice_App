@@ -166,6 +166,7 @@ public class PatternLockAct extends AppCompatActivity {
 
         try {
 
+            /*TODO: if s empty*/
             String s = utilsPasword.getEmail();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
