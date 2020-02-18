@@ -87,17 +87,24 @@
             android:id="@+id/status_password"
             android:padding="20sp"/>
 
-        <com.andrognito.patternlockview.PatternLockView
-            android:layout_width="250dp"
-            android:layout_height="300dp"
-            android:layout_margin="5dp"
-            app:correctStateColor="@color/green"
-            app:dotCount="3"
-            app:dotNormalSize="10sp"
-            app:dotSelectedSize="12dp"
-            app:normalStateColor="@color/grey"
-            app:pathWidth="8dp"
-            android:id="@+id/pattern_view"/>
+        <com.reginald.patternlockview.PatternLockView
+            android:id="@+id/lock_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:lock_size="3"
+            app:lock_enableVibrate="true"
+            app:lock_vibrateTime="110"
+            app:lock_lineColor="#b2ffffff"
+            app:lock_lineWidth="5dp"
+            app:lock_nodeSize="14dp"
+            app:lock_spacing="90dp"
+            app:lock_padding="20dp"
+            app:lock_nodeTouchExpand="25dp"
+            app:lock_nodeSrc="@drawable/pattern_lock_dot_node_normal"
+            app:lock_nodeHighlightSrc="@drawable/pattern_lock_dot_node_highlighted"
+            app:lock_autoLink="true"
+            />
 
     </LinearLayout>
 

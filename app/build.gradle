@@ -27,7 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
+    implementation 'com.reginald:patternlock:2.0.0'
     implementation 'com.shuhart.stepview:stepview:1.2.8'
     implementation 'io.paperdb:paperdb:2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

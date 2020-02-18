@@ -5,7 +5,6 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -16,9 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,19 +23,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.andrognito.patternlockview.PatternLockView;
-import com.andrognito.patternlockview.listener.PatternLockViewListener;
-import com.andrognito.patternlockview.utils.PatternLockUtils;
 import com.applock.dealFiles.files;
 import com.applock.model.Password;
 import com.applock.services.BackgroundManager;
 import com.applock.utils.Utils;
 import com.bigbangbutton.editcodeview.EditCodeListener;
 import com.bigbangbutton.editcodeview.EditCodeView;
+import com.reginald.patternlockview.PatternLockView;
 import com.shuhart.stepview.StepView;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -154,6 +147,7 @@ public class PatternLockAct extends AppCompatActivity {
                     Intent i = new Intent(PatternLockAct.this, p.getClass());
                     i.putExtra("pr","YES");
                     startActivity(i);
+                    finish();
                 }
                 else
                     Toast.makeText(PatternLockAct.this, "Enter Valid Code", Toast.LENGTH_SHORT).show();
@@ -306,27 +300,17 @@ public class PatternLockAct extends AppCompatActivity {
 
     public void initPatternListener()
     {
-        final PatternLockView patternLockView = findViewById(R.id.pattern_view);
-        patternLockView.addPatternLockListener(new PatternLockViewListener() {
+        final PatternLockView pattern_view = findViewById(R.id.lock_view);
+        pattern_view.setCallBack(new PatternLockView.CallBack() {
             @Override
-            public void onStarted() {
+            public int onFinish(PatternLockView.Password password) {
 
-            }
-
-            @Override
-            public void onProgress(List<PatternLockView.Dot> progressPattern) {
-
-            }
-
-            @Override
-            public void onComplete(List<PatternLockView.Dot> pattern) {
-                String pwd = PatternLockUtils.patternToString(patternLockView,pattern);
+                String pwd = password.string;
 
                 if(pwd.length() <4 )
                 {
                     status_password.setText(utilsPasword.SCHEMA_FAILED);
-                    patternLockView.clearPattern();
-                    return;
+                    return PatternLockView.CODE_PASSWORD_ERROR;
                 }
 
                 if(utilsPasword.getPassword() == null)
@@ -356,18 +340,16 @@ public class PatternLockAct extends AppCompatActivity {
                     {
                         status_password.setText(utilsPasword.STATUS_PASSWORD_CORRECT);
                         startAct();
+
+
                     }else
                     {
                         status_password.setText(utilsPasword.STATUS_PASSWORD_INCORRECT);
+                        return PatternLockView.CODE_PASSWORD_ERROR;
                     }
                 }
 
-                patternLockView.clearPattern();
-            }
-
-            @Override
-            public void onCleared() {
-
+                return PatternLockView.CODE_PASSWORD_CORRECT;
             }
         });
     }
